@@ -92,6 +92,22 @@
 
 %end
 
+%hook MRPlatterViewController
+
+	%new
+	- (BOOL)isViewControllerOfLockScreenMusicWidget
+	{
+		return [[self parentViewController] isKindOfClass: %c(CSMediaControlsViewController)];
+	}
+
+	%new
+	- (BOOL)isViewControllerOfControlCenterMusicWidget
+	{
+		return [[self parentViewController] isKindOfClass: %c(MediaControlsEndpointsViewController)];
+	}
+
+	%end
+
 void initMusicWidgetHelper()
 {
 	%init;

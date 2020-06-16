@@ -105,6 +105,22 @@ static void produceLightVibration()
 
 %end
 
+// -------------------------------------- 200 RECENT ALBUMS --------------------------------------
+
+%group _200RecentAlbumsGroup
+
+	%hook MPModelLibraryRequest
+
+	- (void)setContentRange: (NSRange)range
+	{
+		range.length = 200;
+		%orig;
+	}
+
+	%end
+
+%end
+
 // -------------------------------------- HIDE ALBUM SHADOW --------------------------------------
 
 %group hideMusicAppNowPlayingViewAlbumShadowGroup
@@ -247,6 +263,9 @@ void initMusicApp_OtherOptions()
 
 	if([preferences musicAppHideCellSeparators])
 		%init(musicAppHideCellSeparatorsGroup);
+
+	if([preferences _200RecentAlbums])
+		%init(_200RecentAlbumsGroup);
 
 	if([preferences hideMusicAppNowPlayingViewAlbumShadow])
 		%init(hideMusicAppNowPlayingViewAlbumShadowGroup, NowPlayingContentView = NSClassFromString(@"MusicApplication.NowPlayingContentView"));

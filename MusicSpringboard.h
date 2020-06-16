@@ -58,6 +58,12 @@
 - (id)_nowPlayingInfo;
 @end
 
+@interface CSMediaControlsView: UIView
+@end
+
+@interface PLPlatterView: UIView
+@end
+
 @interface CSAdjunctItemView: UIView
 @end
 

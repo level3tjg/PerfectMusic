@@ -46,6 +46,7 @@
 @property(nonatomic, readonly) NSInteger musicAppKeepOrClearAlertAction;
 @property(nonatomic, readonly) BOOL musicAppHideQueueHUD;
 @property(nonatomic, readonly) BOOL musicAppHideCellSeparators;
+@property(nonatomic, readonly) BOOL _200RecentAlbums;
 @property(nonatomic, readonly) BOOL vibrateMusicApp;
 
 @property(nonatomic, readonly) BOOL enableMusicAppCustomTintColor;

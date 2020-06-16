@@ -66,6 +66,7 @@
 		[_preferences registerInteger: &_musicAppKeepOrClearAlertAction default: 1 forKey: @"musicAppKeepOrClearAlertAction"];
 		[_preferences registerBool: &_musicAppHideQueueHUD default: NO forKey: @"musicAppHideQueueHUD"];
 		[_preferences registerBool: &_musicAppHideCellSeparators default: NO forKey: @"musicAppHideCellSeparators"];
+		[_preferences registerBool: &__200RecentAlbums default: NO forKey: @"_200RecentAlbums"];
 		[_preferences registerBool: &_vibrateMusicApp default: NO forKey: @"vibrateMusicApp"];
 
 		[_preferences registerBool: &_enableMusicAppCustomTintColor default: NO forKey: @"enableMusicAppCustomTintColor"];

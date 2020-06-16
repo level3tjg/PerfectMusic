@@ -3,6 +3,8 @@
 
 static MusicPreferences *preferences;
 
+NSInteger cornerMask = 0;
+
 static void produceLightVibration()
 {
 	UIImpactFeedbackGenerator *gen = [[UIImpactFeedbackGenerator alloc] initWithStyle: UIImpactFeedbackStyleLight];
@@ -10,16 +12,36 @@ static void produceLightVibration()
 	[gen impactOccurred];
 }
 
+%group lockscreenMusicWidgetCornerRadiusGroup
+
+	%hook MRPlatterViewController
+
+	- (void)viewDidLayoutSubviews
+	{
+		%orig;
+
+		if([self isViewControllerOfLockScreenMusicWidget])
+		{
+			UIView *backgroundView = [[[[[self view] superview] superview] superview] subviews][0];
+
+			[[backgroundView layer] setCornerRadius: [preferences lockScreenMusicWidgetCornerRadius]];
+			[[backgroundView layer] setMaskedCorners: cornerMask];
+		}
+	}
+
+	%end
+
+%end
+
 %group lockscreenMusicWidgetTransparentBackgroundGroup
 
-	%hook CSAdjunctItemView
+	%hook CSMediaControlsView
 
 	- (void)layoutSubviews
 	{
 		%orig;
 
-		if([self subviews] && [[self subviews] count] > 0 && [[self subviews][0] subviews] && [[[self subviews][0] subviews] count] > 0)
-			[[[self subviews][0] subviews][0] setAlpha: 0];
+		[[[[self superview] superview] subviews][0] setAlpha: 0];
 	}
 
 	%end
@@ -99,7 +121,7 @@ static void produceLightVibration()
 	{
 		%orig;
 		
-		if([[self parentViewController] isKindOfClass: %c(CSMediaControlsViewController)])
+		if([self isViewControllerOfLockScreenMusicWidget])
 			[[[self nowPlayingHeaderView] routingButton] removeFromSuperview];
 	}
 
@@ -110,6 +132,17 @@ static void produceLightVibration()
 void initMusicWidget_OtherOptions()
 {
 	preferences = [MusicPreferences sharedInstance];
+
+	if(![preferences disableTopLeftCornerRadius])
+		cornerMask += kCALayerMinXMinYCorner;
+	if(![preferences disableTopRightCornerRadius])
+		cornerMask += kCALayerMaxXMinYCorner;
+	if(![preferences disableBottomLeftCornerRadius])
+		cornerMask += kCALayerMinXMaxYCorner;
+	if(![preferences disableBottomRightCornerRadius])
+		cornerMask += kCALayerMaxXMaxYCorner;
+
+	%init(lockscreenMusicWidgetCornerRadiusGroup);
 	
 	if([preferences lockscreenMusicWidgetTransparentBackground])
 		%init(lockscreenMusicWidgetTransparentBackgroundGroup);

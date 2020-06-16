@@ -290,7 +290,7 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 			<key>key</key>
 			<string>addLockScreenMusicWidgetBorderDynamicColor</string>
 			<key>label</key>
-			<string>Add Border</string>
+			<string>&#x21B3; Add Border</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -480,7 +480,7 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 			<key>key</key>
 			<string>addControlCenterWidgetBorder</string>
 			<key>label</key>
-			<string>Add Border</string>
+			<string>&#x21B3; Add Border</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -641,6 +641,18 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 			<string>musicAppHideCellSeparators</string>
 			<key>label</key>
 			<string>Hide Cell Separators</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>_200RecentAlbums</string>
+			<key>label</key>
+			<string>200 Recent Albums</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -1034,6 +1046,24 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 			<key>url</key>
    	 		<string>https://github.com/johnzaro/PerfectMusic</string>
 		</dict>
+		<dict>
+        	<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>SPECIAL THANKS - ICON AND BANNER DESIGNER</string>
+        </dict>
+		<dict>
+			<key>big</key>
+    		<true/>
+            <key>cellClass</key>
+            <string>HBTwitterCell</string>
+			<key>height</key>
+    		<integer>56</integer>
+            <key>label</key>
+            <string>𝐑 *¡!</string>
+            <key>user</key>
+            <string>rsxyo</string>
+        </dict>
  		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -1078,7 +1108,7 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 			<key>cellClass</key>
 			<string>HBLinkTableCell</string>
 			<key>label</key>
-			<string>Like my work? Buy me a coffee :)</string>
+			<string>Like my work? Buy me a coffee</string>
 			<key>icon</key>
 			<string>donate.png</string>
 			<key>url</key>

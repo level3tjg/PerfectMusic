@@ -58,8 +58,8 @@ static MusicPreferences *preferences;
 
                 if([preferences musicAppNowPlayingViewColorsStyle] == 1)
                     initMusicApp_DynamicColors();
-                else if([preferences musicAppNowPlayingViewColorsStyle] == 2)
-                    initMusicApp_StaticColors();
+                
+                initMusicApp_StaticColors();
 
             }
         }

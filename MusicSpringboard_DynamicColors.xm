@@ -7,8 +7,6 @@ static Colorizer *colorizer;
 
 static LyricifyButton *lyricifyButton;
 
-int cornerMask = 0;
-
 // ----------------------------------------------------------------------------------------------
 // ---------------- COLORIZE MEDIA PLAYER LOCK SCREEN & CONTROL CENTER WIDGETS ------------------
 // ----------------------------------------------------------------------------------------------
@@ -77,9 +75,6 @@ static void colorizeUILabel(UILabel *label, UIColor *textColor, MTVisualStylingP
 
 			UIView *backgroundView = [[[[[self view] superview] superview] superview] subviews][0];
 
-			[[backgroundView layer] setCornerRadius: [preferences lockScreenMusicWidgetCornerRadius]];
-			[[backgroundView layer] setMaskedCorners: cornerMask];
-
 			if([preferences addLockScreenMusicWidgetBorderDynamicColor])
 				[[backgroundView layer] setBorderWidth: [preferences lockScreenMusicWidgetBorderWidth]];
 
@@ -113,18 +108,6 @@ static void colorizeUILabel(UILabel *label, UIColor *textColor, MTVisualStylingP
 			}
 			completion: nil];
 		}
-	}
-
-	%new
-	- (BOOL)isViewControllerOfLockScreenMusicWidget
-	{
-		return [[self parentViewController] isKindOfClass: %c(CSMediaControlsViewController)];
-	}
-
-	%new
-	- (BOOL)isViewControllerOfControlCenterMusicWidget
-	{
-		return [[self parentViewController] isKindOfClass: %c(MediaControlsEndpointsViewController)];
 	}
 
 	%end
@@ -387,15 +370,6 @@ void initMusicWidget_DynamicColors()
 {
 	preferences = [MusicPreferences sharedInstance];
 	colorizer = [Colorizer sharedInstance];
-
-	if(![preferences disableTopLeftCornerRadius])
-		cornerMask += kCALayerMinXMinYCorner;
-	if(![preferences disableTopRightCornerRadius])
-		cornerMask += kCALayerMaxXMinYCorner;
-	if(![preferences disableBottomLeftCornerRadius])
-		cornerMask += kCALayerMinXMaxYCorner;
-	if(![preferences disableBottomRightCornerRadius])
-		cornerMask += kCALayerMaxXMaxYCorner;
 
 	if([preferences enableLockScreenMusicWidgetDynamicColors] || [preferences enableControlCenterMusicWidgetDynamicColors])
 		%init(colorizeWidgetGroup);
