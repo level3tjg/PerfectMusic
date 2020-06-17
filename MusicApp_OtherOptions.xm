@@ -121,6 +121,23 @@ static void produceLightVibration()
 
 %end
 
+// -------------------------------------- HIDE NOW PLAYING VIEW'S GRABBER --------------------------------------
+
+%group musicAppNowPlayingViewHideGrabberGroup
+
+	%hook MusicNowPlayingControlsViewController
+
+	- (void)viewDidLayoutSubviews
+	{
+		%orig;
+
+		[MSHookIvar<UIView*>(self, "grabberView") setHidden: YES];
+	}
+
+	%end
+
+%end
+
 // -------------------------------------- HIDE ALBUM SHADOW --------------------------------------
 
 %group hideMusicAppNowPlayingViewAlbumShadowGroup
@@ -138,7 +155,7 @@ static void produceLightVibration()
 
 %end
 
-// -------------------------------------- VIBRATIONS  ------------------------------------------------
+// -------------------------------------- VIBRATIONS ------------------------------------------------
 
 %group vibrateMusicAppGroup
 
@@ -244,6 +261,36 @@ static void produceLightVibration()
 
 %end
 
+// -------------------------------------- HIDE 'FOR YOU' AND 'BROWSE' TAB ------------------------------------------------
+
+%group musicAppHideForYouAndBrowseTabsGroup
+
+	%hook MPCloudServiceStatusController
+
+	- (BOOL)isSubscriptionAvailable
+	{
+		return NO;
+	}
+
+	%end
+
+%end
+
+// -------------------------------------- HIDE RADIO TAB ------------------------------------------------
+
+%group musicAppHideRadioTabGroup
+
+	%hook RadioAvailabilityController
+
+	- (BOOL)isRadioAvailable
+	{
+		return NO;
+	}
+
+	%end
+
+%end
+
 void initMusicApp_OtherOptions()
 {
 	preferences = [MusicPreferences sharedInstance];
@@ -267,9 +314,18 @@ void initMusicApp_OtherOptions()
 	if([preferences _200RecentAlbums])
 		%init(_200RecentAlbumsGroup);
 
+	if([preferences musicAppNowPlayingViewHideGrabber])
+		%init(musicAppNowPlayingViewHideGrabberGroup);
+
 	if([preferences hideMusicAppNowPlayingViewAlbumShadow])
 		%init(hideMusicAppNowPlayingViewAlbumShadowGroup, NowPlayingContentView = NSClassFromString(@"MusicApplication.NowPlayingContentView"));
 
 	if([preferences vibrateMusicApp] && ![preferences isIpad]) 
 		%init(vibrateMusicAppGroup, TimeSlider = NSClassFromString(@"MusicApplication.PlayerTimeControl"));
+
+	if([preferences musicAppHideForYouAndBrowseTabs])
+		%init(musicAppHideForYouAndBrowseTabsGroup);
+
+	if([preferences musicAppHideRadioTab])
+		%init(musicAppHideRadioTabGroup);
 }

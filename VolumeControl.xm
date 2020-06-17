@@ -8,6 +8,7 @@ static NSTimer *forwardTimer;
 static NSTimer *backTimer;
 
 static BOOL shouldSwap = NO;
+static BOOL shouldControlPause = NO;
 
 static void produceMediumVibration()
 {
@@ -129,24 +130,45 @@ static void produceMediumVibration()
 
 %end
 
-%group volumeControlGeneralGroup
+%group swapBasedOnOrientationAndPauseOnZeroGroup
 
 	%hook SBVolumeControl
 
 	- (void)increaseVolume
 	{
 		if(shouldSwap)
+		{
 			[self changeVolumeByDelta: -VOLUME_STEP];
+
+			if(shouldControlPause && [self _effectiveVolume] < 0.1 && ![[%c(SBMediaController) sharedInstance] isPaused])
+				[[%c(SBMediaController) sharedInstance] pauseForEventSource: 0];
+		}
 		else
+		{
 			%orig;
+
+			if(shouldControlPause && [self _effectiveVolume] < 0.1 && [[%c(SBMediaController) sharedInstance] isPaused])
+				[[%c(SBMediaController) sharedInstance] playForEventSource: 0];
+		}
+
 	}
 
 	- (void)decreaseVolume
 	{
 		if(shouldSwap)
+		{
 			[self changeVolumeByDelta: VOLUME_STEP];
+
+			if(shouldControlPause && [self _effectiveVolume] < 0.1 && [[%c(SBMediaController) sharedInstance] isPaused])
+				[[%c(SBMediaController) sharedInstance] playForEventSource: 0];
+		}
 		else
+		{
 			%orig;
+
+			if(shouldControlPause && [self _effectiveVolume] < 0.1 && ![[%c(SBMediaController) sharedInstance] isPaused])
+				[[%c(SBMediaController) sharedInstance] pauseForEventSource: 0];
+		}
 	}
 
 	%end
@@ -159,7 +181,10 @@ void initVolumeControl()
 
 	if([preferences enabledMediaControlWithVolumeButtons] || [preferences swapVolumeButtonsBasedOnOrientation])
 	{
-		%init(volumeControlGeneralGroup);
+		shouldControlPause = [preferences pauseMusicOnZeroVolume];
+
+		if(shouldControlPause || [preferences swapVolumeButtonsBasedOnOrientation])
+			%init(swapBasedOnOrientationAndPauseOnZeroGroup);
 
 		if([preferences enabledMediaControlWithVolumeButtons])
 			%init(controlMediaWithVolumeButtonsGroup);

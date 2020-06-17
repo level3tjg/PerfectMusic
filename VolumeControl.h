@@ -9,5 +9,13 @@
 @end
 
 @interface SBVolumeControl
+- (float)_effectiveVolume;
 - (void)changeVolumeByDelta: (float)arg1;
+@end
+
+@interface SBMediaPlayer: NSObject
++ (id)sharedInstance;
+- (BOOL)isPaused;
+- (BOOL)playForEventSource: (long long)arg1;
+- (BOOL)pauseForEventSource: (long long)arg1;
 @end

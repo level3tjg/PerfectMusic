@@ -22,6 +22,8 @@ static void produceLightVibration()
 
 		if([self isViewControllerOfLockScreenMusicWidget])
 		{
+			[[[[self nowPlayingHeaderView] artworkView] layer] setCornerRadius: [preferences lockScreenAlbumArtworkCornerRadius]];
+
 			UIView *backgroundView = [[[[[self view] superview] superview] superview] subviews][0];
 
 			[[backgroundView layer] setCornerRadius: [preferences lockScreenMusicWidgetCornerRadius]];

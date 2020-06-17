@@ -80,6 +80,24 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
+			<string>PAUSES MUSIC WHEN VOLUME GOES TO 0%. RESUMES MUSIC WHEN VOLUME IS TURNED UP AGAIN.</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>pauseMusicOnZeroVolume</string>
+			<key>label</key>
+			<string>Pause Music At 0% Volume</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
 			<string>------ MEDIA NOTIFICATION ------</string>
 			<key>footerAlignment</key>
 			<integer>1</integer>
@@ -98,7 +116,19 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 			<key>key</key>
 			<string>showNotificationOnSongChange</string>
 			<key>label</key>
-			<string>Show Notification On New Song</string>
+			<string>Show Notification On Song Change</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>vibrateOnSongChange</string>
+			<key>label</key>
+			<string>Vibrate On Song Change</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -374,7 +404,33 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>CORNER RADIUS</string>
+			<string>ALBUM ARTWORK CORNER RADIUS</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>default</key>
+			<integer>4</integer>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>lockScreenAlbumArtworkCornerRadius</string>
+			<key>isSegmented</key>
+			<true/>
+			<key>segmentCount</key>
+			<integer>30</integer>
+			<key>min</key>
+			<integer>0</integer>
+			<key>max</key>
+			<integer>30</integer>
+			<key>showValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>MEDIA WIDGET CORNER RADIUS</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -662,6 +718,30 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 			<key>defaults</key>
 			<string>com.johnzaro.perfectmusicprefs</string>
 			<key>key</key>
+			<string>musicAppHideForYouAndBrowseTabs</string>
+			<key>label</key>
+			<string>Hide 'For You' And 'Browse' Tabs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>musicAppHideRadioTab</string>
+			<key>label</key>
+			<string>Hide Radio Tab</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
 			<string>vibrateMusicApp</string>
 			<key>label</key>
 			<string>Add Vibrations To UI Elements</string>
@@ -710,6 +790,20 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>NOW PLAYING VIEW - GENERAL</string>
+			<key>footerText</key>
+			<string>'HIDE GRABBER' HIDES THE 'NOW PLAYING' VIEW'S GRABBER (TOP CENTER).</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>com.johnzaro.perfectmusicprefs</string>
+			<key>key</key>
+			<string>musicAppNowPlayingViewHideGrabber</string>
+			<key>label</key>
+			<string>Hide Grabber</string>
 		</dict>
 		<dict>
 			<key>cell</key>

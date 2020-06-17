@@ -28,8 +28,10 @@
 
 		[_preferences registerBool: &_enabledMediaControlWithVolumeButtons default: NO forKey: @"enabledMediaControlWithVolumeButtons"];
 		[_preferences registerBool: &_swapVolumeButtonsBasedOnOrientation default: NO forKey: @"swapVolumeButtonsBasedOnOrientation"];
+		[_preferences registerBool: &_pauseMusicOnZeroVolume default: NO forKey: @"pauseMusicOnZeroVolume"];
 		
 		[_preferences registerBool: &_showNotificationOnSongChange default: NO forKey: @"_showNotificationOnSongChange"];
+		[_preferences registerBool: &_vibrateOnSongChange default: NO forKey: @"vibrateOnSongChange"];
 
 		[_preferences registerBool: &_lockscreenMusicWidgetTransparentBackground default: NO forKey: @"lockscreenMusicWidgetTransparentBackground"];
 		[_preferences registerBool: &_vibrateMusicWidget default: NO forKey: @"vibrateMusicWidget"];
@@ -49,6 +51,7 @@
 		[_preferences registerDouble: &_lockScreenMusicWidgetBorderColorAlpha default: 1 forKey: @"lockScreenMusicWidgetBorderColorAlpha"];
 		[_preferences registerInteger: &_lockScreenMusicWidgetBorderWidth default: 3 forKey: @"lockScreenMusicWidgetBorderWidth"];
 
+		[_preferences registerInteger: &_lockScreenAlbumArtworkCornerRadius default: 4 forKey: @"lockScreenAlbumArtworkCornerRadius"];
 		[_preferences registerInteger: &_lockScreenMusicWidgetCornerRadius default: 13 forKey: @"lockScreenMusicWidgetCornerRadius"];
 		[_preferences registerBool: &_disableTopLeftCornerRadius default: NO forKey: @"disableTopLeftCornerRadius"];
 		[_preferences registerBool: &_disableTopRightCornerRadius default: NO forKey: @"disableTopRightCornerRadius"];
@@ -67,11 +70,14 @@
 		[_preferences registerBool: &_musicAppHideQueueHUD default: NO forKey: @"musicAppHideQueueHUD"];
 		[_preferences registerBool: &_musicAppHideCellSeparators default: NO forKey: @"musicAppHideCellSeparators"];
 		[_preferences registerBool: &__200RecentAlbums default: NO forKey: @"_200RecentAlbums"];
+		[_preferences registerBool: &_musicAppHideForYouAndBrowseTabs default: NO forKey: @"musicAppHideForYouAndBrowseTabs"];
+		[_preferences registerBool: &_musicAppHideRadioTab default: NO forKey: @"musicAppHideRadioTab"];
 		[_preferences registerBool: &_vibrateMusicApp default: NO forKey: @"vibrateMusicApp"];
 
 		[_preferences registerBool: &_enableMusicAppCustomTintColor default: NO forKey: @"enableMusicAppCustomTintColor"];
 		_musicAppCustomTintColor = [SparkColourPickerUtils colourWithString: [preferencesDictionary objectForKey: @"musicAppCustomTintColor"] withFallback: @"#FF9400"];
 
+		[_preferences registerBool: &_musicAppNowPlayingViewHideGrabber default: NO forKey: @"musicAppNowPlayingViewHideGrabber"];
 		[_preferences registerBool: &_hideMusicAppNowPlayingViewAlbumShadow default: NO forKey: @"hideMusicAppNowPlayingViewAlbumShadow"];
 
 		[_preferences registerInteger: &_musicAppNowPlayingViewColorsStyle default: 0 forKey: @"musicAppNowPlayingViewColorsStyle"];

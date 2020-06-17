@@ -29,7 +29,12 @@ static CGFloat mediaWidgetWidth = 0;
 - (CGRect)_suggestedFrameForMediaControls
 {
 	CGRect frame = %orig;
-	frame.size.height = style == 0 ? 110 : 145;
+	if(style == 0)
+		frame.size.height = 107;
+	else if(style == 1)
+		frame.size.height = 145;
+	else
+		frame.size.height = 123;
 	return frame;
 }
 
@@ -257,6 +262,27 @@ static CGFloat mediaWidgetWidth = 0;
 	
 	if([[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
 		[[self tvRemoteButton] setHidden: YES];
+}
+
+%end
+
+// ------------------ MediaControlsVolumeContainerView ------------------
+
+%hook MediaControlsVolumeContainerView
+
+- (void)setFrame: (CGRect)frame
+{
+	if([[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
+		frame.origin.y = 70;
+	%orig;
+}
+
+- (CGRect)frame
+{
+	CGRect frame = %orig;
+	if([[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
+		frame.origin.y = 70;
+	return frame;
 }
 
 %end

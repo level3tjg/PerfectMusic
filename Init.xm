@@ -35,10 +35,12 @@ static MusicPreferences *preferences;
             {
                 initMusicWidgetHelper();
 
-                if([preferences enabledMediaControlWithVolumeButtons] || [preferences swapVolumeButtonsBasedOnOrientation])
+                if([preferences enabledMediaControlWithVolumeButtons] 
+                || [preferences swapVolumeButtonsBasedOnOrientation] 
+                || [preferences pauseMusicOnZeroVolume])
                     initVolumeControl();
 
-                if([preferences showNotificationOnSongChange])
+                if([preferences showNotificationOnSongChange] || [preferences vibrateOnSongChange])
                     initMediaNotification();
 
                 if([preferences addExtraButtonsToLockScreen] || [preferences addExtraButtonsToControlCenter])
