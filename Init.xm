@@ -17,53 +17,49 @@ extern void initMusicApp_OtherOptions();
 extern void initMusicApp_DynamicColors();
 extern void initMusicApp_StaticColors();
 
-
 static MusicPreferences *preferences;
 
 %ctor
 {
-    @autoreleasepool
-	{
-        preferences = [MusicPreferences sharedInstance];
-		if([preferences enabled])
+    preferences = [MusicPreferences sharedInstance];
+    if([preferences enabled])
+    {
+        NSString *processName = [NSProcessInfo processInfo].processName;
+        bool isSpringboard = [@"SpringBoard" isEqualToString: processName];
+        bool isMusicApp = [@"Music" isEqualToString: processName];
+
+        if(isSpringboard) 
         {
-            NSString *processName = [NSProcessInfo processInfo].processName;
-            bool isSpringboard = [@"SpringBoard" isEqualToString: processName];
-            bool isMusicApp = [@"Music" isEqualToString: processName];
+            initMusicWidgetHelper();
 
-            if(isSpringboard) 
-            {
-                initMusicWidgetHelper();
+            if([preferences enabledMediaControlWithVolumeButtons] 
+            || [preferences swapVolumeButtonsBasedOnOrientation] 
+            || [preferences pauseMusicOnZeroVolume])
+                initVolumeControl();
 
-                if([preferences enabledMediaControlWithVolumeButtons] 
-                || [preferences swapVolumeButtonsBasedOnOrientation] 
-                || [preferences pauseMusicOnZeroVolume])
-                    initVolumeControl();
+            if([preferences showNotificationOnSongChange] || [preferences vibrateOnSongChange])
+                initMediaNotification();
 
-                if([preferences showNotificationOnSongChange] || [preferences vibrateOnSongChange])
-                    initMediaNotification();
+            if([preferences addExtraButtonsToLockScreen] || [preferences addExtraButtonsToControlCenter])
+                initExtraButtons();
 
-                if([preferences addExtraButtonsToLockScreen] || [preferences addExtraButtonsToControlCenter])
-                    initExtraButtons();
+            if([preferences lockScreenMusicWidgetStyle] == 1)
+                initCompactMediaPlayer();
+            
+            initMusicWidget_DynamicColors();
+            initMusicWidget_OtherOptions();
+        }
+        else if(isMusicApp)
+        {
+            initMusicAppHelper();
 
-                if([preferences lockScreenMusicWidgetStyle] == 1)
-                    initCompactMediaPlayer();
-                
-                initMusicWidget_DynamicColors();
-                initMusicWidget_OtherOptions();
-            }
-            else if(isMusicApp)
-            {
-                initMusicAppHelper();
+            initMusicApp_OtherOptions();
 
-                initMusicApp_OtherOptions();
+            if([preferences musicAppNowPlayingViewColorsStyle] == 1)
+                initMusicApp_DynamicColors();
+            
+            initMusicApp_StaticColors();
 
-                if([preferences musicAppNowPlayingViewColorsStyle] == 1)
-                    initMusicApp_DynamicColors();
-                
-                initMusicApp_StaticColors();
-
-            }
         }
     }
 }

@@ -32,9 +32,11 @@ static CGFloat mediaWidgetWidth = 0;
 	if(style == 0)
 		frame.size.height = 107;
 	else if(style == 1)
-		frame.size.height = 145;
-	else
+		frame.size.height = 130;
+	else if(style == 2)
 		frame.size.height = 123;
+	else
+		frame.size.height = 160;
 	return frame;
 }
 
@@ -51,9 +53,9 @@ static CGFloat mediaWidgetWidth = 0;
 		if(!lockScreenMusicWidgetHideRoutingButton)
 			[[[self nowPlayingHeaderView] routingButton] setTransform: CGAffineTransformScale(CGAffineTransformIdentity, 0.8, 0.8)];
 
-		if(style != 1)
+		if(style == 0 || style == 2)
 			[[[[self parentContainerView] containerView] timeControl] removeFromSuperview];
-		if(style != 2)
+		if(style < 2)
 			[[self volumeContainerView] removeFromSuperview];
 	}
 }
@@ -214,10 +216,10 @@ static CGFloat mediaWidgetWidth = 0;
 	if([[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
 	{
 		MediaControlsTimeControl *timeControl = [self timeControl];
-		if(style == 1)
+		if(style == 1 || style == 3)
 		{
 			CGRect timeFrame = [timeControl frame];
-			timeFrame.origin.y = 80;
+			timeFrame.origin.y = 70;
 			[timeControl setFrame: timeFrame];
 		}	
 		else
@@ -273,7 +275,12 @@ static CGFloat mediaWidgetWidth = 0;
 - (void)setFrame: (CGRect)frame
 {
 	if([[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
-		frame.origin.y = 70;
+	{
+		if(style == 2)
+			frame.origin.y = 70;
+		else if(style == 3)
+			frame.origin.y = 105;
+	}
 	%orig;
 }
 
@@ -281,7 +288,12 @@ static CGFloat mediaWidgetWidth = 0;
 {
 	CGRect frame = %orig;
 	if([[self _rootView] isKindOfClass: %c(SBCoverSheetWindow)])
-		frame.origin.y = 70;
+	{
+		if(style == 2)
+			frame.origin.y = 70;
+		else if(style == 3)
+			frame.origin.y = 105;
+	}
 	return frame;
 }
 

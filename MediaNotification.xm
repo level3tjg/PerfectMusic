@@ -43,7 +43,7 @@ static dispatch_queue_t getBBServerQueue()
 
 	%hook SBMediaController
 
-	-(void)setNowPlayingInfo:(id)arg1
+	- (void)setNowPlayingInfo: (id)arg1
 	{
 		%orig;
 

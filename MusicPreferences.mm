@@ -30,7 +30,7 @@
 		[_preferences registerBool: &_swapVolumeButtonsBasedOnOrientation default: NO forKey: @"swapVolumeButtonsBasedOnOrientation"];
 		[_preferences registerBool: &_pauseMusicOnZeroVolume default: NO forKey: @"pauseMusicOnZeroVolume"];
 		
-		[_preferences registerBool: &_showNotificationOnSongChange default: NO forKey: @"_showNotificationOnSongChange"];
+		[_preferences registerBool: &_showNotificationOnSongChange default: NO forKey: @"showNotificationOnSongChange"];
 		[_preferences registerBool: &_vibrateOnSongChange default: NO forKey: @"vibrateOnSongChange"];
 
 		[_preferences registerBool: &_lockscreenMusicWidgetTransparentBackground default: NO forKey: @"lockscreenMusicWidgetTransparentBackground"];

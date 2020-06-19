@@ -105,6 +105,8 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>'NOTIFICATION ON SONG CHANGE' OPTION REQUIRES NOTIFICATIONS OF THE MUSIC APP TO BE ENABLED.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -116,7 +118,7 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
 			<key>key</key>
 			<string>showNotificationOnSongChange</string>
 			<key>label</key>
-			<string>Show Notification On Song Change</string>
+			<string>Notification On Song Change</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -242,12 +244,14 @@ PRESS AND RELEASE VOLUME UP AND THEN PRESS AND RELEASE VOLUME DOWN FOR PREVIOUS 
       			<string>No Extras</string>
       			<string>+ Time</string>
       			<string>+ Volume</string>
+      			<string>+ Both</string>
 			</array>
       		<key>validValues</key>
 			<array>
       			<string>0</string>
       			<string>1</string>
       			<string>2</string>
+      			<string>3</string>
 			</array>
 		</dict>
 		<dict>
