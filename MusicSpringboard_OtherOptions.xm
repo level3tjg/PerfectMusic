@@ -42,8 +42,11 @@ static void produceLightVibration()
 	- (void)layoutSubviews
 	{
 		%orig;
-
-		[[[[self superview] superview] subviews][0] setAlpha: 0];
+		MTMaterialView *materialView = (MTMaterialView *)[[[self superview] superview] subviews][0];
+		materialView.recipe = 4;
+		materialView.blurEnabled = NO;
+		materialView.zoomEnabled = NO;
+		materialView.weighting = 0;
 	}
 
 	%end

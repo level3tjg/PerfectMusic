@@ -185,6 +185,10 @@
 @end
 
 @interface MTMaterialView: UIView
+@property (nonatomic, assign) NSInteger recipe;
+@property (nonatomic, assign) BOOL blurEnabled;
+@property (nonatomic, assign) BOOL zoomEnabled;
+@property (nonatomic, assign) CGFloat weighting;
 @end
 
 @interface MPArtworkCatalog : NSObject
